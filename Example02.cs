@@ -1,47 +1,55 @@
-﻿namespace CSharpAsynchExample
-{
-    internal class Example02
-    {
-        private int ratio = 100;
+﻿using CSharpAsynchExample.Console;
+using CSharpAsynchExample.Printer;
 
+namespace CSharpAsynchExample
+{
+    internal class Example02 : IAsyncExample
+    {
+        private int ratio = 1;
+        private Console02 printer;
+
+        public Example02()
+        {
+        }
+
+        [MethodLogger]
         public async Task Main()
         {
-            ConsoleWriteLine($"Start Program");
+            var method = "Main";
+            printer.WriteLine($"Start Program", method);
 
-            Task<int> taskA = MethodAAsync();
+            Task<int> task01 = MAsync01();
 
             for (int i = 0; i < 5; i++)
             {
-                ConsoleWriteLine($" B{i}");
+                printer.WriteLine($"Iteration: {i}", method);
                 Task.Delay(ratio*50).Wait();
             }
 
-            ConsoleWriteLine("Wait for taskA termination");
+            printer.WriteLine("Wait for task01 termination", method);
+            await task01;
 
-            await taskA;
-
-            ConsoleWriteLine($"The result of taskA is {taskA.Result}");
-            Console.ReadKey();
+            printer.WriteLine($"Main end, result = {task01.Result}", method);
         }
 
-        async Task<int> MethodAAsync()
+        [MethodLogger]
+        async Task<int> MAsync01()
         {
+            var method = "MAsync01";
             for (int i = 0; i < 5; i++)
             {
-                ConsoleWriteLine($" A{i}");
+                printer.WriteLine($"Iteration: {i}", method);
                 await Task.Delay(ratio*100);
             }
+            printer.WriteLine(MP.BeBack, $"After foreach", method);
             int result = 123;
-            ConsoleWriteLine($" A returns result {result}");
+            
             return result;
         }
 
-        void ConsoleWriteLine(string str)
+        public void SetPrinter(Console02 printer)
         {
-            int threadId = Thread.CurrentThread.ManagedThreadId;
-            Console.ForegroundColor = threadId == 1 ? ConsoleColor.White : ConsoleColor.Cyan;
-            Console.WriteLine(
-               $"{str}{new string(' ', 26 - str.Length)}   Thread {threadId}");
+            this.printer = printer;
         }
     }
 }
