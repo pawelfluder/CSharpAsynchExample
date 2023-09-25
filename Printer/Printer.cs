@@ -3,19 +3,19 @@ using System.Reflection;
 
 namespace CSharpAsynchExample.Printer
 {
-    public class Console02
+    public class Printer : IPrinter
     {
         private DateTime initialDateTime;
         private readonly string[] headers;
         List<(ConsoleColor, string[])> listOfColorQParts;
         private int[] maxArray;
 
-        public Console02(string[] headers)
+        public Printer(string[] headers)
         {
             this.headers = headers;
             listOfColorQParts = new List<(ConsoleColor, string[])>();
             var empty = Enumerable.Repeat("", headers.Length).ToArray();
-            
+
             listOfColorQParts.Add((ConsoleColor.White, headers));
             listOfColorQParts.Add((ConsoleColor.White, empty));
         }
@@ -95,7 +95,7 @@ namespace CSharpAsynchExample.Printer
             listOfColorQParts.Add((color, parts));
         }
 
-        internal void WriteMethod(MP phaze, MethodBase methodBase)
+        public void WriteMethod(MP phaze, MethodBase methodBase)
         {
             // 01
             var str01Time = GetMiniseconds(DateTime.Now);

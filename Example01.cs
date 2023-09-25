@@ -1,11 +1,10 @@
-﻿using CSharpAsynchExample.Printer;
+﻿using CSharpAsynchExample.Console;
 
 namespace CSharpAsynchExample
 {
     internal class Example01 : IAsyncExample
     {
         private int ratio = 1;
-        private Console02 printer;
 
         public async Task Main()
         {
@@ -18,14 +17,8 @@ namespace CSharpAsynchExample
             {
                 Task.Delay(ratio * 50).Wait();
                 timeElapsed += interval;
-                ConsoleWriteLine(name + " :" + timeElapsed);
+                MethodLogger.WriteLine(name + " :" + timeElapsed);
             }
-        }
-
-
-        public void SetPrinter(Console02 printer)
-        {
-            this.printer = printer;
         }
 
         public async Task Work01()
@@ -42,17 +35,8 @@ namespace CSharpAsynchExample
             {
                 await Task.Delay(interval);
                 timeElapsed += interval;
-                ConsoleWriteLine(name + " :" + timeElapsed);
+                MethodLogger.WriteLine(name + " :" + timeElapsed);
             }
         }
-
-        void ConsoleWriteLine(string str)
-        {
-            int threadId = Thread.CurrentThread.ManagedThreadId;
-            System.Console.ForegroundColor = threadId == 1 ? ConsoleColor.White : ConsoleColor.Cyan;
-            System.Console.WriteLine(
-               $"{str}{new string(' ', 26 - str.Length)} Thread {threadId}");
-        }
-
     }
 }

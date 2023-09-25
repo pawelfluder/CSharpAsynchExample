@@ -13,20 +13,12 @@ public static class Program
     {
         var method = "RunExample";
         var headers = new string[] { "Time", "ThId", "Phaze", "Method", "Message" };
-        var printer = new Console02(headers);
-        MethodLogger.SetConsole(printer);
-        example.SetPrinter(printer);
+        var printer = new Printer(headers);
+        MethodLogger.SetPrinter(printer);
         example.Main();
-        printer.WriteLine("After Main()", method);
+        MethodLogger.WriteLine("After Main()", method);
         Thread.Sleep(1000);
-        printer.WriteLine("After Sleep", method);
-        printer.Print();
+        MethodLogger.WriteLine("After Sleep", method);
+        MethodLogger.Print();
     }
 }
-
-
-
-
-
-//var example03 = new Example03();
-//await example03.Main();

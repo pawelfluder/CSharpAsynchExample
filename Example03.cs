@@ -38,10 +38,7 @@ namespace CSharpAsynchExample
             var milliseconds = stopWatch.ElapsedMilliseconds;
 
             var underFiveSeconds = milliseconds < 5000;
-
-            //Assert.True(underFiveSeconds);
         }
-
 
         public async Task Test2()
         {
