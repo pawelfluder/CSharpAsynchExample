@@ -6,4 +6,9 @@ namespace CSharpAsynchExample
     {
         Task Main();
     }
+
+    public interface IExample
+    {
+        void Main();
+    }
 }

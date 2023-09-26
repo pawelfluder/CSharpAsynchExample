@@ -9,7 +9,7 @@ namespace CSharpAsynchExample.Console
     public class MethodLogger : Attribute, IMethodDecorator
     {
         private MethodBase methodBase;
-        private static IPrinter console;
+        private static IPrinter printer;
         private static List<MethodLogger> loggerList = new List<MethodLogger>();
 
         public MethodLogger()
@@ -19,39 +19,39 @@ namespace CSharpAsynchExample.Console
 
         public static void Print()
         {
-            console.Print();
+            printer.Print();
         }
 
         public static void WriteLine(string msg)
         {
             var methodName = GetLoggerMethodName();
-            console.WriteLine(msg, methodName);
+            printer.WriteLine(msg, methodName);
         }
 
         public static void WriteLine(string msg, string methodName)
         {
-            console.WriteLine(msg, methodName);
+            printer.WriteLine(msg, methodName);
         }
 
         public static void WriteLine(string msg, MethodBase methodBase)
         {
-            console.WriteLine(msg, methodBase);
+            printer.WriteLine(msg, methodBase);
         }
 
         public static void WriteLine(MP phaze, string msg)
         {
             var methodName = GetLoggerMethodName();
-            console.WriteLine(phaze, msg, methodName);
+            printer.WriteLine(phaze, msg, methodName);
         }
 
         public static void WriteLine(MP phaze, string msg, string methodName)
         {
-            console.WriteLine(phaze, msg, methodName);
+            printer.WriteLine(phaze, msg, methodName);
         }
 
         public static void WriteLine(MP phaze, string msg, MethodBase methodBase)
         {
-            console.WriteLine(phaze, msg, methodBase);
+            printer.WriteLine(phaze, msg, methodBase);
         }
 
         private static MethodBase GetMethod()
@@ -85,9 +85,17 @@ namespace CSharpAsynchExample.Console
             return "??";
         }
 
-        public static void SetPrinter(IPrinter console2)
+        public static void SetPrinter(IPrinter inputPrinter)
         {
-            console = console2;
+            printer = inputPrinter;
+        }
+
+        private string GetCallStackMethodName()
+        {
+            var stackTrace = new StackTrace();
+            var methodBase = stackTrace.GetFrame(2).GetMethod();
+            var callStack = methodBase.Name;
+            return callStack;
         }
 
         public void Init(object instance, MethodBase methodBase, object[] args)
@@ -97,17 +105,20 @@ namespace CSharpAsynchExample.Console
 
         public void OnEntry()
         {
-            console.WriteMethod(MP.Entry, methodBase);
+            var callStack = GetCallStackMethodName();
+            printer.WriteMethod(MP.Entry, methodBase, callStack);
         }
 
         public void OnExit()
         {
-            console.WriteMethod(MP.Exit, methodBase);
+            var callStack = GetCallStackMethodName();
+            printer.WriteMethod(MP.Exit, methodBase, callStack);
         }
 
         public void OnException(Exception exception)
         {
-            console.WriteMethod(MP.Error, methodBase);
+            var callStack = GetCallStackMethodName();
+            printer.WriteMethod(MP.Error, methodBase, callStack);
         }
     }
 }

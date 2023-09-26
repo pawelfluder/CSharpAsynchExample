@@ -52,9 +52,7 @@ namespace CSharpAsynchExample.Printer
 
         public void WriteLine(string msg)
         {
-            var stackTrace = new StackTrace();
-            var methodBase = stackTrace.GetFrame(1).GetMethod();
-            WriteLine(MP.Doing, msg, methodBase);
+            WriteLine(MP.Doing, msg, "??");
         }
 
         public void WriteLine(string msg, MethodBase methodBase)
@@ -87,15 +85,20 @@ namespace CSharpAsynchExample.Printer
             // 04
             // str04Method
 
+            //05
+            var stackTrace = new StackTrace();
+            var methodBase = stackTrace.GetFrame(3).GetMethod();
+            var str05callStack = methodBase.Name;
+
             // color
             var color = threadId == 1 ? ConsoleColor.White : ConsoleColor.Cyan;
 
             var parts = new string[] {
-                str01Time, str02Thread, str03Phaze, str04Method, str05Msg };
+                str01Time, str02Thread, str03Phaze, str04Method, str05callStack, str05Msg };
             listOfColorQParts.Add((color, parts));
         }
 
-        public void WriteMethod(MP phaze, MethodBase methodBase)
+        public void WriteMethod(MP phaze, MethodBase methodBase, string str05CallStack)
         {
             // 01
             var str01Time = GetMiniseconds(DateTime.Now);
@@ -109,13 +112,15 @@ namespace CSharpAsynchExample.Printer
 
             // 04
             var str04Method = methodBase.Name;
-            var name = methodBase.Name;
+
+            // 05
+            // str05CallStack
 
             // color
             var color = threadId == 1 ? ConsoleColor.White : ConsoleColor.Cyan;
 
             var parts = new string[] {
-                str01Time, str02Thread, str03Phaze, str04Method, "Generated" };
+                str01Time, str02Thread, str03Phaze, str04Method, str05CallStack, "Generated" };
             listOfColorQParts.Add((color, parts));
         }
 

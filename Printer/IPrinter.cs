@@ -10,6 +10,6 @@ namespace CSharpAsynchExample.Printer
         void WriteLine(string msg, MethodBase methodBase);
         void WriteLine(MP phaze, string msg, MethodBase methodBase);
         void WriteLine(MP phaze, string str05Msg, string str04Method);
-        void WriteMethod(MP phaze, MethodBase methodBase);
+        void WriteMethod(MP phaze, MethodBase methodBase, string callStack);
     }
 }

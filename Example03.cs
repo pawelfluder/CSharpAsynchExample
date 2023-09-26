@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace CSharpAsynchExample
 {
-    internal class Example03
+    internal class Example03 : IAsyncExample
     {
         public async Task Main()
         {
