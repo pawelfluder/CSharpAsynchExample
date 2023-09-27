@@ -1,14 +1,14 @@
-﻿using CSharpAsynchExample.Console;
-using CSharpAsynchExample.Printer;
+﻿using CSharpAsynchExample.ConsolePrinter;
+using CSharpAsynchExample.ExampleBase;
 
 namespace CSharpAsynchExample
 {
-    internal class Example02 : IAsyncExample
+    internal class Example02 : ThreadAnalysis, IExample
     {
         private int ratio = 1;
 
         [MethodLogger]
-        public async Task Main()
+        protected override async Task Main()
         {
             MethodLogger.WriteLine($"Start Program");
 

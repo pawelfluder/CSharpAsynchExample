@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
 
-namespace CSharpAsynchExample.Printer
+namespace CSharpAsynchExample.ConsolePrinter
 {
     public class Printer : IPrinter
     {
@@ -25,7 +25,7 @@ namespace CSharpAsynchExample.Printer
             Calculate();
             foreach (var item in listOfColorQParts)
             {
-                System.Console.ForegroundColor = item.Item1;
+                Console.ForegroundColor = item.Item1;
                 var parts = string.Empty;
                 for (int i = 0; i < maxArray.Length; i++)
                 {
@@ -35,7 +35,7 @@ namespace CSharpAsynchExample.Printer
                     var str = tmp + sep;
                     parts += str;
                 }
-                System.Console.WriteLine(parts);
+                Console.WriteLine(parts);
             }
         }
 

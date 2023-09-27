@@ -1,4 +1,4 @@
-﻿namespace CSharpAsynchExample.Printer
+﻿namespace CSharpAsynchExample.ConsolePrinter
 {
     public enum MP
     {

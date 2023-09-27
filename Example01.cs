@@ -1,12 +1,13 @@
-﻿using CSharpAsynchExample.Console;
+﻿using CSharpAsynchExample.ConsolePrinter;
+using CSharpAsynchExample.ExampleBase;
 
 namespace CSharpAsynchExample
 {
-    internal class Example01 : IAsyncExample
+    internal class Example01 : ThreadAnalysis, IExample
     {
         private int ratio = 1;
 
-        public async Task Main()
+        protected override async Task Main()
         {
             var task01 = Work01();
 
@@ -21,12 +22,12 @@ namespace CSharpAsynchExample
             }
         }
 
-        public async Task Work01()
+        private async Task Work01()
         {
             await Work02();
         }
 
-        public async Task Work02()
+        private async Task Work02()
         {
             var timeElapsed = 0;
             var interval = ratio * 10;

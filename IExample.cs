@@ -1,14 +1,7 @@
-﻿using CSharpAsynchExample.Printer;
-
-namespace CSharpAsynchExample
+﻿namespace CSharpAsynchExample
 {
-    public interface IAsyncExample
-    {
-        Task Main();
-    }
-
     public interface IExample
     {
-        void Main();
+        void Run();
     }
 }

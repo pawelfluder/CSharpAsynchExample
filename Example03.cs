@@ -1,17 +1,18 @@
-﻿using CSharpAsynchExample.Console;
+﻿using CSharpAsynchExample.ConsolePrinter;
+using CSharpAsynchExample.ExampleBase;
 using System.Diagnostics;
 
 namespace CSharpAsynchExample
 {
-    internal class Example03 : IAsyncExample
+    internal class Example03 : ThreadAnalysis, IExample
     {
-        public async Task Main()
+        protected override async Task Main()
         {
-            Test1();
+            await Test1();
         }
 
         [MethodLogger]
-        public async Task<string> ReturnFoo()
+        private async Task<string> ReturnFoo()
         {
             await Task.Delay(3000);
 
@@ -19,14 +20,14 @@ namespace CSharpAsynchExample
         }
 
         [MethodLogger]
-        public async Task<string> ReturnFooFoo()
+        private async Task<string> ReturnFooFoo()
         {
             await Task.Delay(4000);
 
             return "foofoo";
         }
 
-        public async Task Test1()
+        private async Task Test1()
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -40,7 +41,7 @@ namespace CSharpAsynchExample
             var underFiveSeconds = milliseconds < 5000;
         }
 
-        public async Task Test2()
+        private async Task Test2()
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();

@@ -1,9 +1,8 @@
-﻿using CSharpAsynchExample.Printer;
-using MethodDecorator.Fody.Interfaces;
+﻿using MethodDecorator.Fody.Interfaces;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace CSharpAsynchExample.Console
+namespace CSharpAsynchExample.ConsolePrinter
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class MethodLogger : Attribute, IMethodDecorator

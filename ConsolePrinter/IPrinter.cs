@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace CSharpAsynchExample.Printer
+namespace CSharpAsynchExample.ConsolePrinter
 {
     public interface IPrinter
     {
