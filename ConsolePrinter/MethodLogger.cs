@@ -19,7 +19,7 @@ namespace CSharpAsynchExample.ConsolePrinter
 
         public static void PrintCollected()
         {
-            printer.PrintAll();
+            printer.PrintCollected();
         }
 
         public static void RealPrint(string msg)
@@ -117,19 +117,19 @@ namespace CSharpAsynchExample.ConsolePrinter
         public void OnEntry()
         {
             var callStack = GetCallStackMethodName();
-            printer.WriteMethod(MP.Entry, methodBase, callStack);
+            printer.CollectMethod(MP.Entry, methodBase, callStack);
         }
 
         public void OnExit()
         {
             var callStack = GetCallStackMethodName();
-            printer.WriteMethod(MP.Exit, methodBase, callStack);
+            printer.CollectMethod(MP.Exit, methodBase, callStack);
         }
 
         public void OnException(Exception exception)
         {
             var callStack = GetCallStackMethodName();
-            printer.WriteMethod(MP.Error, methodBase, callStack);
+            printer.CollectMethod(MP.Error, methodBase, callStack);
         }
     }
 }

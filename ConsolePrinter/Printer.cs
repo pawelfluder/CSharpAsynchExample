@@ -33,7 +33,7 @@ namespace CSharpAsynchExample.ConsolePrinter
             printC = setting[2].Equals('1') ? true : false;
         }
 
-        public void PrintAll()
+        public void PrintCollected()
         {
             if (printA)
             {
@@ -144,7 +144,7 @@ namespace CSharpAsynchExample.ConsolePrinter
             listOfColorQParts.Add((color, parts));
         }
 
-        public void WriteMethod(MP phaze, MethodBase methodBase, string str05CallStack)
+        public void CollectMethod(MP phaze, MethodBase methodBase, string str05CallStack)
         {
             // 01
             var str01Time = GetMiniseconds(DateTime.Now);

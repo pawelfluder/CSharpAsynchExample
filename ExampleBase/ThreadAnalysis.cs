@@ -1,15 +1,10 @@
 ﻿using CSharpAsynchExample.ConsolePrinter;
-using System;
-using System.Reflection;
 
 namespace CSharpAsynchExample.ExampleBase
 {
     public abstract class ThreadAnalysis
     {
         protected abstract Task EMain();
-
-        //private bool print;
-        //public void SetPrint(bool value) => print = value;
 
         public bool PrintCollected { get; internal set; }
 
@@ -24,14 +19,5 @@ namespace CSharpAsynchExample.ExampleBase
             MethodLogger.RealPrint("");
             MethodLogger.PrintCollected();
         }
-
-        //protected MethodInfo GetScenarioByMethodName(string methodName)
-        //{
-        //    var methodInfo = this.GetType().GetMethod(methodName);
-        //    var scenario = () => await methodInfo.Invoke(this, new object[0]);
-
-        //    Func<Task> = 
-        //    return methodInfo;
-        //}
     }
 }
