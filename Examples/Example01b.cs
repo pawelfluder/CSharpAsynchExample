@@ -26,7 +26,7 @@ namespace CSharpAsynchExample.Examples
         public void ScenarioTwo()
         {
             MethodLogger.WriteLine("Scenarion 2:");
-            Task.WaitAll(DoShortWorkAsync(), DoLongWorkAsync());
+            Task.WaitAll(DoLongWorkAsync(), DoShortWorkAsync());
         }
 
         [MethodLogger]
