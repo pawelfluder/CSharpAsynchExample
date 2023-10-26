@@ -1,9 +1,9 @@
 ﻿using CSharpAsynchExample.ConsolePrinter;
 using CSharpAsynchExample.ExampleBase;
 
-namespace CSharpAsynchExample
+namespace CSharpAsynchExample.Examples
 {
-    internal class Example03 : ThreadAnalysis, IExample
+    internal class Example03 : ThreadAnalysis, IAsyncExample
     {
         private int ratio = 1;
 
@@ -17,7 +17,7 @@ namespace CSharpAsynchExample
             for (int i = 0; i < 5; i++)
             {
                 MethodLogger.WriteLine($"Iteration: {i}");
-                Task.Delay(ratio*50).Wait();
+                Task.Delay(ratio * 50).Wait();
             }
 
             MethodLogger.WriteLine("Wait for task01 termination");
@@ -32,11 +32,11 @@ namespace CSharpAsynchExample
             for (int i = 0; i < 5; i++)
             {
                 MethodLogger.WriteLine($"Iteration: {i}", "MAsync01");
-                await Task.Delay(ratio*100);
+                await Task.Delay(ratio * 100);
             }
             MethodLogger.WriteLine(MP.BeBack, $"After foreach", "MAsync01");
             int result = 123;
-            
+
             return result;
         }
     }

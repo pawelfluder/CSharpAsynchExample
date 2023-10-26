@@ -1,9 +1,9 @@
 ﻿using CSharpAsynchExample.ConsolePrinter;
 using CSharpAsynchExample.ExampleBase;
 
-namespace CSharpAsynchExample
+namespace CSharpAsynchExample.Examples
 {
-    internal class Example04 : ThreadAnalysis, IExample
+    internal class Example04 : ThreadAnalysis, IAsyncExample
     {
         private int ratio = 1;
 

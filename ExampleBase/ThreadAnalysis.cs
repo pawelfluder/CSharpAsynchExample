@@ -18,14 +18,11 @@ namespace CSharpAsynchExample.ExampleBase
             var headers = new string[] { "Time", "ThId", "Phaze", "Method", "CallStack", "Message" };
             var printer = new Printer(headers);
             MethodLogger.SetPrinter(printer);
+            printer.SetPrintSetting(MethodLogger.PrinterSetting);
             var mainTask = EMain();
             await mainTask;
             MethodLogger.RealPrint("");
-
-            if (PrintCollected)
-            {
-                MethodLogger.PrintCollected();
-            }
+            MethodLogger.PrintCollected();
         }
 
         //protected MethodInfo GetScenarioByMethodName(string methodName)

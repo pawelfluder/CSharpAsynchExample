@@ -8,20 +8,47 @@ namespace CSharpAsynchExample.ConsolePrinter
         private DateTime initialDateTime;
         private readonly string[] headers;
         List<(ConsoleColor, string[])> listOfColorQParts;
+        bool printA;
+        bool printB;
+        bool printC;
 
         public Printer(string[] headers)
         {
             this.headers = headers;
             listOfColorQParts = new List<(ConsoleColor, string[])>();
+            printA = true;
+            printB = true;
+            printC = true;
+        }
+
+        public void SetPrintSetting(string setting)
+        {
+            if (setting.Length != 3)
+            {
+                throw new Exception();
+            }
+
+            printA = setting[0].Equals('1') ? true : false;
+            printB = setting[1].Equals('1') ? true : false;
+            printC = setting[2].Equals('1') ? true : false;
         }
 
         public void PrintAll()
         {
-            var tmp01 = listOfColorQParts.Where(x => x.Item2.Last() == "Generated").ToList();
-            var tmp02 = listOfColorQParts.Where(x => x.Item2.Last() != "Generated").ToList();
-            Print(tmp02);
-            Print(tmp01);
-            Print(listOfColorQParts);
+            if (printA)
+            {
+                var tmp02 = listOfColorQParts.Where(x => x.Item2.Last() != "Generated").ToList();
+                Print(tmp02);
+            }
+            if (printB)
+            {
+                var tmp01 = listOfColorQParts.Where(x => x.Item2.Last() == "Generated").ToList();
+                Print(tmp01);
+            }
+            if (printC)
+            {
+                Print(listOfColorQParts);
+            }
         }
 
         public void AddHeader(

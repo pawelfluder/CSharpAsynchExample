@@ -10,6 +10,7 @@ namespace CSharpAsynchExample.ConsolePrinter
         private MethodBase methodBase;
         private static IPrinter printer;
         private static List<MethodLogger> loggerList = new List<MethodLogger>();
+        public static string PrinterSetting { get; set; }
 
         public MethodLogger()
         {

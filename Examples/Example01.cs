@@ -1,32 +1,44 @@
 ﻿using CSharpAsynchExample.ConsolePrinter;
 using CSharpAsynchExample.ExampleBase;
 
-namespace CSharpAsynchExample
+namespace CSharpAsynchExample.Examples
 {
-    internal class Example01b : ThreadAnalysis, IExample
+    internal class Example01 : ThreadAnalysis, IAsyncExample
     {
         private int ratio = 100;
-        public Action scenario;
+        public Func<Task> scenario;
 
-        public IExample SetScenario(Action s){ scenario = s; return this; }
+        public IAsyncExample SetScenario(Func<Task> s) { scenario = s; return this; }
 
         [MethodLogger]
         protected override async Task EMain()
         {
-            ERun();
+            await Run();
         }
 
         [MethodLogger]
-        private async Task ERun()
+        private async Task Run()
         {
-            scenario.Invoke();
+            await scenario.Invoke();
         }
 
         [MethodLogger]
-        public void ScenarioTwo()
+        public async Task ScenarioOne()
         {
-            MethodLogger.WriteLine("Scenarion 2:");
-            Task.WaitAll(DoShortWorkAsync(), DoLongWorkAsync());
+            MethodLogger.WriteLine("Scenarion 1:");
+            await DoLongWorkAsync();
+            await DoShortWorkAsync();
+        }
+
+        [MethodLogger]
+        public async Task ScenarioThree()
+        {
+            MethodLogger.WriteLine("Scenarion 3:");
+            Task longWork = DoLongWorkAsync();
+            Task shortWork = DoShortWorkAsync();
+
+            await longWork;
+            await shortWork;
         }
 
         [MethodLogger]

@@ -2,9 +2,9 @@
 using CSharpAsynchExample.ExampleBase;
 using System.Diagnostics;
 
-namespace CSharpAsynchExample
+namespace CSharpAsynchExample.Examples
 {
-    internal class Example05 : ThreadAnalysis, IExample
+    internal class Example05 : ThreadAnalysis, IAsyncExample
     {
         protected override async Task EMain()
         {

@@ -11,5 +11,6 @@ namespace CSharpAsynchExample.ConsolePrinter
         void CollectLine(MP phaze, string msg, MethodBase methodBase);
         void CollectLine(MP phaze, string str05Msg, string str04Method);
         void WriteMethod(MP phaze, MethodBase methodBase, string callStack);
+        void SetPrintSetting(string setting);
     }
 }

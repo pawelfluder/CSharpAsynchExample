@@ -15,8 +15,4 @@
     <PackageReference Include="MethodDecorator.Fody" Version="1.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Printer\" />
-  </ItemGroup>
-
 </Project>
