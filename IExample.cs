@@ -2,6 +2,6 @@
 {
     public interface IExample
     {
-        void Run();
+        void ERun();
     }
 }
