@@ -2,6 +2,6 @@
 {
     public interface IExample
     {
-        void ERun();
+        Task ERun();
     }
 }

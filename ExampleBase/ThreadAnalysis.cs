@@ -8,14 +8,24 @@ namespace CSharpAsynchExample.ExampleBase
     {
         protected abstract Task EMain();
 
-        public async void ERun()
+        //private bool print;
+        //public void SetPrint(bool value) => print = value;
+
+        public bool PrintCollected { get; internal set; }
+
+        public async Task ERun()
         {
             var headers = new string[] { "Time", "ThId", "Phaze", "Method", "CallStack", "Message" };
             var printer = new Printer(headers);
             MethodLogger.SetPrinter(printer);
             var mainTask = EMain();
             await mainTask;
-            MethodLogger.Print();
+            MethodLogger.RealPrint("");
+
+            if (PrintCollected)
+            {
+                MethodLogger.PrintCollected();
+            }
         }
 
         //protected MethodInfo GetScenarioByMethodName(string methodName)

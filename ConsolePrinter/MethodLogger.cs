@@ -16,41 +16,52 @@ namespace CSharpAsynchExample.ConsolePrinter
             loggerList.Add(this);
         }
 
-        public static void Print()
+        public static void PrintCollected()
         {
-            printer.Print();
+            printer.PrintAll();
+        }
+
+        public static void RealPrint(string msg)
+        {
+            Console.WriteLine(msg);
+        }
+
+        public static void WriteLine()
+        {
+            RealPrint("");
         }
 
         public static void WriteLine(string msg)
         {
             var methodName = GetLoggerMethodName();
-            printer.WriteLine(msg, methodName);
+            printer.CollectLine(msg, methodName);
+            RealPrint(msg);
         }
 
         public static void WriteLine(string msg, string methodName)
         {
-            printer.WriteLine(msg, methodName);
+            printer.CollectLine(msg, methodName);
         }
 
         public static void WriteLine(string msg, MethodBase methodBase)
         {
-            printer.WriteLine(msg, methodBase);
+            printer.CollectLine(msg, methodBase);
         }
 
         public static void WriteLine(MP phaze, string msg)
         {
             var methodName = GetLoggerMethodName();
-            printer.WriteLine(phaze, msg, methodName);
+            printer.CollectLine(phaze, msg, methodName);
         }
 
         public static void WriteLine(MP phaze, string msg, string methodName)
         {
-            printer.WriteLine(phaze, msg, methodName);
+            printer.CollectLine(phaze, msg, methodName);
         }
 
         public static void WriteLine(MP phaze, string msg, MethodBase methodBase)
         {
-            printer.WriteLine(phaze, msg, methodBase);
+            printer.CollectLine(phaze, msg, methodBase);
         }
 
         private static MethodBase GetMethod()

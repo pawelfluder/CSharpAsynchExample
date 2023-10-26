@@ -3,42 +3,30 @@ using CSharpAsynchExample.ExampleBase;
 
 namespace CSharpAsynchExample
 {
-    internal class Example01 : ThreadAnalysis, IExample
+    internal class Example01b : ThreadAnalysis, IExample
     {
         private int ratio = 100;
-        public Func<Task> scenario;
+        public Action scenario;
 
-        public IExample SetScenario(Func<Task> s){ scenario = s; return this; }
+        public IExample SetScenario(Action s){ scenario = s; return this; }
 
         [MethodLogger]
         protected override async Task EMain()
         {
-            await Run();
+            ERun();
         }
 
         [MethodLogger]
-        private async Task Run()
+        private async Task ERun()
         {
-            await scenario.Invoke();
+            scenario.Invoke();
         }
 
         [MethodLogger]
-        public async Task ScenarioOne()
+        public void ScenarioTwo()
         {
-            MethodLogger.WriteLine("Scenarion 1:");
-            await DoLongWorkAsync();
-            await DoShortWorkAsync();
-        }
-
-        [MethodLogger]
-        public async Task ScenarioThree()
-        {
-            MethodLogger.WriteLine("Scenarion 3:");
-            Task longWork = DoLongWorkAsync();
-            Task shortWork = DoShortWorkAsync();
-
-            await longWork;
-            await shortWork;
+            MethodLogger.WriteLine("Scenarion 2:");
+            Task.WaitAll(DoShortWorkAsync(), DoLongWorkAsync());
         }
 
         [MethodLogger]

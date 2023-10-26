@@ -1,17 +1,21 @@
 ﻿using CSharpAsynchExample;
+using CSharpAsynchExample.ConsolePrinter;
 
 public static class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        var e01 = new Example01();
-        e01.SetScenario(e01.ScenarioOne).ERun();
-        //e01.SetScenario(e01.ScenarioTwo).ERun();
-        //e01.SetScenario(e01.ScenarioThree).ERun();
+        //var e01 = new Example01() { PrintCollected = false };
+        //var e01b = new Example01b() { PrintCollected = false };
+        //await e01.SetScenario(e01.ScenarioOne).ERun();
+        //e01b.SetScenario(e01b.ScenarioTwo).ERun();
+        //await e01.SetScenario(e01.ScenarioThree).ERun();
 
-        //new Example04().Run();
-        //new Example02().Run();
-        //new Example03().Run();
+        //await new Example02().ERun();
+
+        //await new Example03().ERun();
+
+        //await new Example04().ERun();
 
         Console.ReadLine();
     }

@@ -4,12 +4,12 @@ namespace CSharpAsynchExample.ConsolePrinter
 {
     public interface IPrinter
     {
-        void Print();
+        void PrintAll();
         void WriteLine(string msg);
-        void WriteLine(string msg, string methodName);
-        void WriteLine(string msg, MethodBase methodBase);
-        void WriteLine(MP phaze, string msg, MethodBase methodBase);
-        void WriteLine(MP phaze, string str05Msg, string str04Method);
+        void CollectLine(string msg, string methodName);
+        void CollectLine(string msg, MethodBase methodBase);
+        void CollectLine(MP phaze, string msg, MethodBase methodBase);
+        void CollectLine(MP phaze, string str05Msg, string str04Method);
         void WriteMethod(MP phaze, MethodBase methodBase, string callStack);
     }
 }

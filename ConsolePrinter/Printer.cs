@@ -8,32 +8,37 @@ namespace CSharpAsynchExample.ConsolePrinter
         private DateTime initialDateTime;
         private readonly string[] headers;
         List<(ConsoleColor, string[])> listOfColorQParts;
-        private int[] maxArray;
 
         public Printer(string[] headers)
         {
             this.headers = headers;
             listOfColorQParts = new List<(ConsoleColor, string[])>();
-            var empty = Enumerable.Repeat("", headers.Length).ToArray();
-
-            listOfColorQParts.Add((ConsoleColor.White, headers));
-            listOfColorQParts.Add((ConsoleColor.White, empty));
         }
 
         public void PrintAll()
         {
-
+            var tmp01 = listOfColorQParts.Where(x => x.Item2.Last() == "Generated").ToList();
+            var tmp02 = listOfColorQParts.Where(x => x.Item2.Last() != "Generated").ToList();
+            Print(tmp02);
+            Print(tmp01);
+            Print(listOfColorQParts);
         }
 
-        public void PrintOnlyGenerated()
+        public void AddHeader(
+            List<(ConsoleColor, string[])> input)
         {
-
+            var empty = Enumerable.Repeat("", headers.Length).ToArray();
+            input.Insert(0, (ConsoleColor.White, empty));
+            input.Insert(0, (ConsoleColor.White, headers));
+            input.Add((ConsoleColor.White, empty));
         }
 
-        private void Print()
+        private void Print(
+            List<(ConsoleColor, string[])> inputList)
         {
-            Calculate();
-            foreach (var item in listOfColorQParts)
+            AddHeader(inputList);
+            var maxArray = Calculate(inputList);
+            foreach (var item in inputList)
             {
                 Console.ForegroundColor = item.Item1;
                 var parts = string.Empty;
@@ -45,42 +50,46 @@ namespace CSharpAsynchExample.ConsolePrinter
                     var str = tmp + sep;
                     parts += str;
                 }
+
                 Console.WriteLine(parts);
             }
         }
 
-        private void Calculate()
+        private int[] Calculate(
+            List<(ConsoleColor, string[])> input)
         {
             var tmpList = new List<int>();
             for (int i = 0; i < headers.Count(); i++)
             {
-                var max = listOfColorQParts.Select(x => x.Item2[i]).Max(x => x.Length);
+                var max = input.Select(x => x.Item2[i]).Max(x => x.Length);
                 tmpList.Add(max);
             }
-            maxArray = tmpList.ToArray();
+
+            var maxArray = tmpList.ToArray();
+            return maxArray;
         }
 
         public void WriteLine(string msg)
         {
-            WriteLine(MP.Doing, msg, "??");
+            CollectLine(MP.Doing, msg, "??");
         }
 
-        public void WriteLine(string msg, MethodBase methodBase)
+        public void CollectLine(string msg, MethodBase methodBase)
         {
-            WriteLine(MP.Doing, msg, methodBase.Name);
+            CollectLine(MP.Doing, msg, methodBase.Name);
         }
 
-        public void WriteLine(MP phaze, string msg, MethodBase methodBase)
+        public void CollectLine(MP phaze, string msg, MethodBase methodBase)
         {
-            WriteLine(MP.Doing, msg, methodBase.Name);
+            CollectLine(MP.Doing, msg, methodBase.Name);
         }
 
-        public void WriteLine(string msg, string methodName)
+        public void CollectLine(string msg, string methodName)
         {
-            WriteLine(MP.Doing, msg, methodName);
+            CollectLine(MP.Doing, msg, methodName);
         }
 
-        public void WriteLine(MP phaze, string str05Msg, string str04Method)
+        public void CollectLine(MP phaze, string str05Msg, string str04Method)
         {
             // 01
             var str01Time = GetMiniseconds(DateTime.Now);
