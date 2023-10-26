@@ -6,17 +6,20 @@ namespace CSharpAsynchExample
     internal class Example01 : ThreadAnalysis, IExample
     {
         private int ratio = 100;
-        public Func<Task> Scenario { get; set; }
+        public Func<Task> scenario;
 
+        public IExample SetScenario(Func<Task> s){ scenario = s; return this; }
+
+        [MethodLogger]
         protected override async Task EMain()
         {
-            await Run();
+            await ERun();
         }
 
         [MethodLogger]
-        private async Task Run()
+        private async Task ERun()
         {
-            await Scenario.Invoke();
+            await scenario.Invoke();
             Console.WriteLine();
         }
 

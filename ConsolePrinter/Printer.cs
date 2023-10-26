@@ -20,7 +20,17 @@ namespace CSharpAsynchExample.ConsolePrinter
             listOfColorQParts.Add((ConsoleColor.White, empty));
         }
 
-        public void Print()
+        public void PrintAll()
+        {
+
+        }
+
+        public void PrintOnlyGenerated()
+        {
+
+        }
+
+        private void Print()
         {
             Calculate();
             foreach (var item in listOfColorQParts)
